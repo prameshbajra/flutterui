@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterui/home_page.dart';
+import 'package:flutterui/profile_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -25,13 +26,17 @@ class _RootPage extends StatefulWidget {
 
 class __RootPageState extends State<_RootPage> {
   int currentPage = 0;
+  List<Widget> pages = const [
+    HomePage(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tabs Demo'),
       ),
-      body: const HomePage(),
+      body: pages[currentPage],
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(

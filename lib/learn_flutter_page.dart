@@ -31,7 +31,46 @@ class LearnFlutterPage extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          ElevatedButton(
+            onPressed: () {
+              debugPrint("Elevated Button Clicked");
+            },
+            child: const Text("Elevated Button"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              debugPrint("Outlined Button Clicked");
+            },
+            child: const Text("Outlined Button"),
+          ),
+          TextButton(
+            onPressed: () {
+              debugPrint("Text Button Clicked");
+            },
+            child: const Text("Text Button"),
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              debugPrint("Gesture Detector Clicked");
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(
+                  Icons.local_fire_department,
+                  color: Colors.deepOrange,
+                ),
+                Text("Row Widget"),
+                Icon(
+                  Icons.local_fire_department,
+                  color: Colors.deepOrange,
+                ),
+              ],
+            ),
+          ),
+          
         ],
       ),
     );
