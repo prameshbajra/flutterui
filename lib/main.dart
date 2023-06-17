@@ -1,59 +1,51 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: MyApp()));
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    )..repeat(reverse: true);
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (_, child) {
-                return Container(
-                  width: 200 + (_controller.value * 100),
-                  height: 200 + (_controller.value * 100),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.blue, width: 3.0),
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.teal,
+        body: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                color: Colors.red,
+                child: const Text('Container 1'),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.yellow,
+                    child: const Text('Container 2'),
                   ),
-                );
-              },
-            ),
-            FloatingActionButton(
-              onPressed: () {},
-              child: Icon(Icons.add),
-            ),
-          ],
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.green,
+                    child: const Text('Container 2.1'),
+                  )
+                ],
+              ),
+              Container(
+                color: Colors.blue,
+                child: const Text('Container 3'),
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
