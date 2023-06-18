@@ -44,52 +44,33 @@ class MyApp extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 20,
+                  width: 200,
+                  child: Divider(color: Colors.white),
                 ),
-                Container(
-                  width: 250,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Colors.white,
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.phone,
-                        color: Colors.teal,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        '+91 9999999999',
-                        style: TextStyle(fontSize: 20.0, color: Colors.teal),
-                      ),
-                    ],
+                const Card(
+                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.phone,
+                      color: Colors.teal,
+                    ),
+                    title: Text(
+                      '+9779813457822',
+                      style: TextStyle(color: Colors.teal),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: 250,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Colors.white,
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.email,
-                        color: Colors.teal,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'pe.messh@gmail.com',
-                        style: TextStyle(fontSize: 20.0, color: Colors.teal),
-                      ),
-                    ],
+                const Card(
+                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.email,
+                      color: Colors.teal,
+                    ),
+                    title: Text(
+                      'pe.messh@gmaill.com',
+                      style: TextStyle(color: Colors.teal),
+                    ),
                   ),
                 )
               ],
