@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,50 +18,30 @@ class MyApp extends StatelessWidget {
           title: const Text('Dice'),
         ),
         body: const SafeArea(
-          child: DicePage(),
+          child: XylophonePage(),
         ),
       ),
     );
   }
 }
 
-class DicePage extends StatefulWidget {
-  const DicePage({super.key});
+class XylophonePage extends StatefulWidget {
+  const XylophonePage({super.key});
 
   @override
-  State<DicePage> createState() => _DicePageState();
+  State<XylophonePage> createState() => _XylophonePageState();
 }
 
-class _DicePageState extends State<DicePage> {
-  int leftDiceNumber = 1;
-  int rightDiceNumber = 1;
-
-  void randomizeDiceNumber() {
-    return setState(() {
-      leftDiceNumber = Random().nextInt(6) + 1;
-      rightDiceNumber = Random().nextInt(6) + 1;
-    });
-  }
-
+class _XylophonePageState extends State<XylophonePage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextButton(
-              onPressed: randomizeDiceNumber,
-              child: Image.asset('assets/images/dice$leftDiceNumber.png'),
-            ),
-          ),
-          Expanded(
-            child: TextButton(
-              onPressed: randomizeDiceNumber,
-              child: Image.asset('assets/images/dice$rightDiceNumber.png'),
-            ),
-          )
-        ],
-      ),
+    return ElevatedButton(
+      onPressed: () {
+        final audioPlayer = AudioPlayer();
+        audioPlayer.play(UrlSource(
+            'https://github.com/londonappbrewery/xylophone-flutter/raw/master/assets/note1.wav'));
+      },
+      child: const Text('Play'),
     );
   }
 }
