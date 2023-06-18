@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,36 +14,86 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                color: Colors.red,
-                child: const Text('Container 1'),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.yellow,
-                    child: const Text('Container 2'),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const CircleAvatar(
+                  radius: 50,
+                  foregroundImage: NetworkImage(
+                      'https://prameshbajra.github.io/static/assets/img/landing/pramesh.jpg'),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Pramesh Bajracharya',
+                  style: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: GoogleFonts.pacifico().fontFamily,
+                    color: Colors.white,
                   ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.green,
-                    child: const Text('Container 2.1'),
-                  )
-                ],
-              ),
-              Container(
-                color: Colors.blue,
-                child: const Text('Container 3'),
-              ),
-            ],
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Software Engineer',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 250,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Colors.white,
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.phone,
+                        color: Colors.teal,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        '+91 9999999999',
+                        style: TextStyle(fontSize: 20.0, color: Colors.teal),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: 250,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Colors.white,
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.email,
+                        color: Colors.teal,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'pe.messh@gmail.com',
+                        style: TextStyle(fontSize: 20.0, color: Colors.teal),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
