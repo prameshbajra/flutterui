@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,71 +13,55 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const CircleAvatar(
-                  radius: 50,
-                  foregroundImage: NetworkImage(
-                      'https://prameshbajra.github.io/static/assets/img/landing/pramesh.jpg'),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Pramesh Bajracharya',
-                  style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: GoogleFonts.pacifico().fontFamily,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Software Engineer',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                  width: 200,
-                  child: Divider(color: Colors.white),
-                ),
-                const Card(
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.phone,
-                      color: Colors.teal,
-                    ),
-                    title: Text(
-                      '+9779813457822',
-                      style: TextStyle(color: Colors.teal),
-                    ),
-                  ),
-                ),
-                const Card(
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.email,
-                      color: Colors.teal,
-                    ),
-                    title: Text(
-                      'pe.messh@gmaill.com',
-                      style: TextStyle(color: Colors.teal),
-                    ),
-                  ),
-                )
-              ],
+        backgroundColor: Colors.redAccent,
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: const Text('Dice'),
+        ),
+        body: const SafeArea(
+          child: DicePage(),
+        ),
+      ),
+    );
+  }
+}
+
+class DicePage extends StatefulWidget {
+  const DicePage({super.key});
+
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int leftDiceNumber = 1;
+  int rightDiceNumber = 1;
+
+  void randomizeDiceNumber() {
+    return setState(() {
+      leftDiceNumber = Random().nextInt(6) + 1;
+      rightDiceNumber = Random().nextInt(6) + 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextButton(
+              onPressed: randomizeDiceNumber,
+              child: Image.asset('assets/images/dice$leftDiceNumber.png'),
             ),
           ),
-        ),
+          Expanded(
+            child: TextButton(
+              onPressed: randomizeDiceNumber,
+              child: Image.asset('assets/images/dice$rightDiceNumber.png'),
+            ),
+          )
+        ],
       ),
     );
   }
