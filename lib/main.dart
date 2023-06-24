@@ -1,8 +1,6 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,92 +12,155 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: const Text('Xylophone'),
+          title: const Text('Quiz'),
         ),
         body: const SafeArea(
-          child: XylophonePage(),
+          child: QuizPage(),
         ),
       ),
     );
   }
 }
 
-class XylophonePage extends StatefulWidget {
-  const XylophonePage({super.key});
+class QuizPage extends StatefulWidget {
+  const QuizPage({super.key});
 
   @override
-  State<XylophonePage> createState() => _XylophonePageState();
+  State<QuizPage> createState() => _QuizPageState();
 }
 
-class _XylophonePageState extends State<XylophonePage> {
-  final _audioPlayer = AudioPlayer();
-
-  _play(int noteNumber) async {
-    _audioPlayer.play(AssetSource('note$noteNumber.wav'));
-  }
+class _QuizPageState extends State<QuizPage> {
+  List<Map<String, dynamic>> questionSet = [
+    {'question': 'The capital of Australia is Sydney?', 'answer': false},
+    {
+      'question':
+          'The symbol for the element Iron on the periodic table is Fe?',
+      'answer': true
+    },
+    {
+      'question': 'Jupiter is the largest planet in our solar system?',
+      'answer': true
+    },
+    {'question': 'The Second World War ended in 1944?', 'answer': false},
+    {
+      'question': 'The Mona Lisa was painted by Vincent van Gogh?',
+      'answer': false
+    },
+    {'question': 'The square root of 81 is 9?', 'answer': true},
+    {
+      'question': 'Joe Biden was the President of the United States in 2021?',
+      'answer': true
+    },
+    {'question': 'Hummus is primarily made of lentils?', 'answer': false},
+    {'question': 'Minecraft was developed by Mojang?', 'answer': true},
+    {'question': 'Elephants are the largest land animal?', 'answer': true}
+  ];
+  List<Icon> scores = [];
+  int questionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> question = questionSet[questionIndex];
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: TextButton(
-            onPressed: () => _play(1),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.red)),
-            child: const Text(''),
+          flex: 5,
+          child: Center(
+            child: Text(
+              question['question'] ?? 'Error',
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white, fontSize: 30),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: scores,
           ),
         ),
         Expanded(
           child: TextButton(
-            onPressed: () => _play(2),
+            onPressed: () => {
+              setState(
+                () => {
+                  if (questionIndex < questionSet.length - 1)
+                    {
+                      questionIndex += 1,
+                      if (question['answer'])
+                        {
+                          scores.add(const Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ))
+                        }
+                      else
+                        {
+                          scores.add(const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ))
+                        },
+                    },
+                },
+              ),
+            },
             style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.green)),
-            child: const Text(''),
+              backgroundColor: MaterialStatePropertyAll(
+                Colors.green,
+              ),
+            ),
+            child: const Text('True',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                )),
           ),
         ),
         Expanded(
           child: TextButton(
-            onPressed: () => _play(3),
+            onPressed: () => {
+              setState(
+                () => {
+                  if (questionIndex < questionSet.length - 1)
+                    {
+                      questionIndex += 1,
+                      if (!question['answer'])
+                        {
+                          scores.add(
+                            const Icon(
+                              Icons.check,
+                              color: Colors.green,
+                            ),
+                          ),
+                        }
+                      else
+                        {
+                          scores.add(
+                            const Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            ),
+                          )
+                        },
+                    }
+                },
+              ),
+            },
             style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.yellow)),
-            child: const Text(''),
+              backgroundColor: MaterialStatePropertyAll(
+                Colors.red,
+              ),
+            ),
+            child: const Text('False',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                )),
           ),
         ),
-        Expanded(
-          child: TextButton(
-            onPressed: () => _play(4),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.blue)),
-            child: const Text(''),
-          ),
-        ),
-        Expanded(
-          child: TextButton(
-            onPressed: () => _play(5),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.purple)),
-            child: const Text(''),
-          ),
-        ),
-        Expanded(
-          child: TextButton(
-            onPressed: () => _play(6),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.pink)),
-            child: const Text(''),
-          ),
-        ),
-        Expanded(
-          child: TextButton(
-            onPressed: () => _play(7),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.brown)),
-            child: const Text(''),
-          ),
-        )
       ],
     );
   }
