@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const BMICalculator());
 
+const Color bottomContainerColor = Color(0xFFEB1555);
+const double bottomContainerHeight = 80.0;
+const Color activeCardColor = Color(0xFF1D1E33);
+
 class BMICalculator extends StatelessWidget {
   const BMICalculator({super.key});
 
@@ -39,49 +43,55 @@ class _InputPageState extends State<InputPage> {
         title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
-        children: [
-          Expanded(
+        children: <Widget>[
+          const Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    color: const Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    color: const Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 )
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    color: const Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 )
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    color: const Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    color: const Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 ),
               ],
             ),
+          ),
+          Container(
+            color: bottomContainerColor,
+            margin: const EdgeInsets.only(top: 10.0),
+            width: double.infinity,
+            height: bottomContainerHeight,
           )
         ],
       ),
@@ -90,9 +100,9 @@ class _InputPageState extends State<InputPage> {
 }
 
 class ReusableCard extends StatelessWidget {
-  Color color;
+  final Color color;
 
-  ReusableCard({super.key, required this.color});
+  const ReusableCard({super.key, required this.color});
 
   @override
   Widget build(BuildContext context) {
