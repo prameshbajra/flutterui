@@ -10,6 +10,11 @@ const double bottomContainerHeight = 80.0;
 const Color activeCardColor = Color(0xFF1D1E33);
 const Color inactiveCardColor = Color(0xFF111328);
 
+enum Gender {
+  male,
+  female,
+}
+
 class BMICalculator extends StatelessWidget {
   const BMICalculator({super.key});
 
@@ -43,9 +48,10 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColor = inactiveCardColor;
   Color femaleCardColor = inactiveCardColor;
 
-  void updateCardColor(String gender) {
-    maleCardColor = gender == 'MALE' ? activeCardColor : inactiveCardColor;
-    femaleCardColor = gender == 'FEMALE' ? activeCardColor : inactiveCardColor;
+  void updateCardColor(Gender gender) {
+    maleCardColor = gender == Gender.male ? activeCardColor : inactiveCardColor;
+    femaleCardColor =
+        gender == Gender.female ? activeCardColor : inactiveCardColor;
   }
 
   @override
@@ -63,7 +69,7 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () => {
                       setState(
-                        () => updateCardColor('MALE'),
+                        () => updateCardColor(Gender.male),
                       ),
                     },
                     child: ReusableCard(
@@ -78,7 +84,7 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () => {
                       setState(
-                        () => updateCardColor('FEMALE'),
+                        () => updateCardColor(Gender.female),
                       )
                     },
                     child: ReusableCard(
