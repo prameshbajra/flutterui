@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/constants.dart';
 
 class CustomIconWidget extends StatelessWidget {
   final String widgetText;
@@ -25,10 +26,7 @@ class CustomIconWidget extends StatelessWidget {
         ),
         Text(
           widgetText,
-          style: const TextStyle(
-            fontSize: 18.0,
-            color: Color(0xFF8D8E98),
-          ),
+          style: labelTextStyle,
         ),
       ],
     );

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/constants.dart';
 import 'package:flutterui/custom_icon.dart';
 import 'package:flutterui/reusable_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(const BMICalculator());
-
-const Color bottomContainerColor = Color(0xFFEB1555);
-const double bottomContainerHeight = 80.0;
-const Color activeCardColor = Color(0xFF1D1E33);
-const Color inactiveCardColor = Color(0xFF111328);
 
 enum Gender {
   male,
@@ -46,6 +42,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
+  int height = 160;
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +84,47 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'HEIGHT',
+                          style: labelTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              height.toString(),
+                              style: labelBoldTextStyle,
+                            ),
+                            const Text(
+                              'cm',
+                              style: labelTextStyle,
+                            )
+                          ],
+                        ),
+                        Slider(
+                            value: height.toDouble(),
+                            min: 50,
+                            max: 400,
+                            activeColor: activeSliderColor,
+                            inactiveColor: inactiveSliderColor,
+                            onChanged: (double newValue) {
+                              setState(() {
+                                height = newValue.toInt();
+                              });
+                            })
+                      ],
+                    ),
                   ),
                 )
               ],
