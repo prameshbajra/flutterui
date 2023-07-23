@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/utility.dart';
 import 'package:flutterui/constants.dart';
 import 'package:flutterui/custom_icon.dart';
+import 'package:flutterui/results_page.dart';
 import 'package:flutterui/reusable_card.dart';
 import 'package:flutterui/round_icon_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,6 +47,7 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 160;
   int weight = 60;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +161,9 @@ class _InputPageState extends State<InputPage> {
                           style: labelTextStyle,
                         ),
                         Text(weight.toString(), style: labelBoldTextStyle),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -185,20 +191,82 @@ class _InputPageState extends State<InputPage> {
                     ),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'AGE',
+                          style: labelTextStyle,
+                        ),
+                        Text(age.toString(), style: labelBoldTextStyle),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onButtonPressedHandler: () {
+                                setState(() {
+                                  age -= 1;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onButtonPressedHandler: () {
+                                setState(() {
+                                  age += 1;
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            margin: const EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: bottomContainerHeight,
-          )
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Results(
+                      bmiValue: BMIUtility.calculateBmi(height, weight),
+                    );
+                  },
+                ),
+              );
+            },
+            child: Container(
+              color: bottomContainerColor,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: bottomContainerHeight,
+              child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'CALCULATE',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                      ),
+                    ),
+                  ]),
+            ),
+          ),
         ],
       ),
     );
