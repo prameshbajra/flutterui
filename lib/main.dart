@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterui/constants.dart';
 import 'package:flutterui/custom_icon.dart';
 import 'package:flutterui/reusable_card.dart';
+import 'package:flutterui/round_icon_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(const BMICalculator());
@@ -43,6 +44,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 160;
+  int weight = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -112,17 +114,29 @@ class _InputPageState extends State<InputPage> {
                             )
                           ],
                         ),
-                        Slider(
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: activeSliderColor,
+                            inactiveTrackColor: inactiveSliderColor,
+                            thumbColor: activeSliderColor,
+                            thumbShape: const RoundSliderThumbShape(
+                              enabledThumbRadius: 15.0,
+                            ),
+                            overlayColor: activeSliderColor.withOpacity(0.16),
+                            overlayShape: const RoundSliderOverlayShape(
+                                overlayRadius: 30.0),
+                          ),
+                          child: Slider(
                             value: height.toDouble(),
                             min: 50,
                             max: 400,
-                            activeColor: activeSliderColor,
-                            inactiveColor: inactiveSliderColor,
                             onChanged: (double newValue) {
                               setState(() {
                                 height = newValue.toInt();
                               });
-                            })
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -130,15 +144,48 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'WEIGHT',
+                          style: labelTextStyle,
+                        ),
+                        Text(weight.toString(), style: labelBoldTextStyle),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onButtonPressedHandler: () {
+                                  setState(() {
+                                    weight -= 1;
+                                  });
+                                },
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onButtonPressedHandler: () {
+                                  setState(() {
+                                    weight += 1;
+                                  });
+                                },
+                              )
+                            ])
+                      ],
+                    ),
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
                   ),
