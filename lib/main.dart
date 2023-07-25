@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:clima/screens/loading_screen.dart';
+import 'package:flash_chat/screens/welcome_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(FlashChat());
 
-class MyApp extends StatelessWidget {
-
+class FlashChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
-      home: LoadingScreen(),
+      theme: ThemeData.dark().copyWith(
+        textTheme: TextTheme(
+          bodySmall: TextStyle(color: Colors.black54),
+        ),
+      ),
+      home: WelcomeScreen(),
     );
   }
 }
