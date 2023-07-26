@@ -1,6 +1,9 @@
+import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  static const String id = 'registration';
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -87,6 +90,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
+                ),
+              ),
+            ),
+            Material(
+              color: Colors.redAccent,
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              elevation: 5.0,
+              child: MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, WelcomeScreen.id);
+                },
+                minWidth: 200.0,
+                height: 42.0,
+                child: Text(
+                  'Back',
                 ),
               ),
             ),

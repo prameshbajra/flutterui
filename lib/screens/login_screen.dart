@@ -1,6 +1,9 @@
+import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String id = 'login';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -99,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
               elevation: 5.0,
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pushNamed(context, WelcomeScreen.id);
                 },
                 minWidth: 200.0,
                 height: 42.0,
