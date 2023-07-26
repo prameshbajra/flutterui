@@ -93,6 +93,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            Material(
+              color: Colors.redAccent,
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              elevation: 5.0,
+              child: MaterialButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                minWidth: 200.0,
+                height: 42.0,
+                child: Text(
+                  'Back',
+                ),
+              ),
+            ),
           ],
         ),
       ),
