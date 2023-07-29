@@ -1,3 +1,4 @@
+import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -81,38 +82,14 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 24.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Implement login functionality.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
-            ),
-            Material(
+            RoundedButton(
+                title: 'Log in', color: Colors.green, onPressed: () {}),
+            RoundedButton(
+              title: 'Back',
               color: Colors.redAccent,
-              borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              elevation: 5.0,
-              child: MaterialButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, WelcomeScreen.id);
-                },
-                minWidth: 200.0,
-                height: 42.0,
-                child: Text(
-                  'Back',
-                ),
-              ),
+                Navigator.of(context).pop();
+              },
             ),
           ],
         ),
