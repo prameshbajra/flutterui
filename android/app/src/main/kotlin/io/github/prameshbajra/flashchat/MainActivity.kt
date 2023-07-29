@@ -1,4 +1,4 @@
-package com.example.flutterui
+package io.github.prameshbajra.flashchat
 
 import io.flutter.embedding.android.FlutterActivity
 
