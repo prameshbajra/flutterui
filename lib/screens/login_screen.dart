@@ -65,13 +65,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'Log in',
                 color: Colors.green,
                 onPressed: () async {
-                  UserCredential loggedInUser =
-                      await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
-                  print('*******************************');
-                  print(loggedInUser);
-                  print('********************************');
-                  Navigator.pushNamed(context, ChatScreen.id);
+                  try {
+                    UserCredential loggedInUser =
+                        await _auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+                    print('*******************************');
+                    print(loggedInUser);
+                    print('********************************');
+                    Navigator.pushNamed(context, ChatScreen.id);
+                  } catch (e) {
+                    print('*******************************');
+                    print(e);
+                    print('********************************');
+                  }
                 }),
             RoundedButton(
               title: 'Back',
