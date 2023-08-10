@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/components/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 
@@ -12,6 +13,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   String typedTextForChat = '';
+  TextEditingController _messageTextController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   CollectionReference messagesCollectionReference =
@@ -68,9 +70,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         .map((DocumentSnapshot document) {
                           Map<String, dynamic> data =
                               document.data()! as Map<String, dynamic>;
-                          return ListTile(
-                            title: Text(data['text']),
-                            subtitle: Text(data['email']),
+                          return MessageBubble(
+                            text: data['text'],
+                            email: data['email'],
                           );
                         })
                         .toList()
@@ -86,6 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: _messageTextController,
                       onChanged: (value) {
                         typedTextForChat = value;
                       },
@@ -100,6 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           'text': typedTextForChat,
                           'email': _auth.currentUser?.email
                         });
+                        _messageTextController.clear();
                       }
                     },
                     child: Text(
