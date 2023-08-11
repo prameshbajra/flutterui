@@ -66,6 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
                 return Expanded(
                   child: ListView(
+                    reverse: true,
                     children: snapshot.data!.docs
                         .map((DocumentSnapshot document) {
                           Map<String, dynamic> data =

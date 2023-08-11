@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -8,15 +9,31 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    bool isBuddleFromCurrentUser = _auth.currentUser?.email == email;
     return Padding(
-      padding: EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 0.0),
+      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: isBuddleFromCurrentUser
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: <Widget>[
           Material(
             elevation: 5.0,
-            borderRadius: BorderRadius.circular(50.0),
-            color: Colors.lightBlueAccent,
+            borderRadius: isBuddleFromCurrentUser
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
+                  )
+                : BorderRadius.only(
+                    topRight: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
+                  ),
+            color: isBuddleFromCurrentUser
+                ? Colors.lightBlueAccent
+                : Colors.lightGreen,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,
