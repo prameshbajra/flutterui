@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todey/screens/tasks_screen.dart';
 
-Future<void> main() async {
+void main() async {
   runApp(Todoey());
 }
 
@@ -8,7 +9,8 @@ class Todoey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Todoey(),
+      title: 'Todoey',
+      home: TodosScreen(),
     );
   }
 }
