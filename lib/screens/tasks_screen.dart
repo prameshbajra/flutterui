@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todey/component/tasks_list.dart';
+import 'package:todey/screens/add_task_screen.dart';
 
 class TodosScreen extends StatelessWidget {
   const TodosScreen({super.key});
@@ -9,7 +10,20 @@ class TodosScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: AddTaskScreen(),
+              ),
+            ),
+          );
+        },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
       ),
