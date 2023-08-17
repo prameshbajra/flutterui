@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todey/component/task_item.dart';
 import 'package:todey/models/task.dart';
+import 'package:todey/provider.dart';
 
 class TasksList extends StatefulWidget {
   TasksList({
@@ -12,14 +14,9 @@ class TasksList extends StatefulWidget {
 }
 
 class _TasksListState extends State<TasksList> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk', isDone: true),
-    Task(name: 'Buy eggs', isDone: true),
-    Task(name: 'Buy bread', isDone: false),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<Task> tasks = Provider.of<TaskListProvider>(context).tasks;
     return ListView.builder(
       itemBuilder: (context, index) {
         return TaskItem(
