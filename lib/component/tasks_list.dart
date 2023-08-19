@@ -4,16 +4,7 @@ import 'package:todey/component/task_item.dart';
 import 'package:todey/models/task.dart';
 import 'package:todey/provider.dart';
 
-class TasksList extends StatefulWidget {
-  TasksList({
-    super.key,
-  });
-
-  @override
-  State<TasksList> createState() => _TasksListState();
-}
-
-class _TasksListState extends State<TasksList> {
+class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Task> tasks = Provider.of<TaskListProvider>(context).tasks;
@@ -23,9 +14,8 @@ class _TasksListState extends State<TasksList> {
           taskName: tasks[index].name,
           isDone: tasks[index].isDone,
           onChanged: (bool? newValue) {
-            setState(() {
-              tasks[index].toggleDone(newValue ?? false);
-            });
+            Provider.of<TaskListProvider>(context, listen: false)
+                .toggleDone(index);
           },
         );
       },

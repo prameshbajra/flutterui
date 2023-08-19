@@ -13,4 +13,13 @@ class TaskListProvider extends ChangeNotifier {
     tasks = tasks.where((element) => element.name == task.name).toList();
     notifyListeners();
   }
+
+  void toggleDone(int index) {
+    tasks[index].isDone = !tasks[index].isDone;
+    notifyListeners();
+  }
+
+  int get activetaskCount {
+    return tasks.where((element) => !element.isDone).length;
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todey/component/tasks_list.dart';
+import 'package:todey/provider.dart';
 import 'package:todey/screens/add_task_screen.dart';
 
 class TodosScreen extends StatelessWidget {
@@ -7,6 +9,9 @@ class TodosScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String todayTaskCount =
+        Provider.of<TaskListProvider>(context).activetaskCount.toString();
+    print('**********' + todayTaskCount);
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
@@ -55,7 +60,7 @@ class TodosScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '12 tasks today',
+                    todayTaskCount + " Tasks",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
