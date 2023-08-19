@@ -35,19 +35,19 @@ class AddTaskScreen extends StatelessWidget {
               ),
               SizedBox(height: 30.0),
               TextField(
-                autofocus: true,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(),
+                  autofocus: true,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(),
                   onChanged: (String newTaskName) {
                     taskName = newTaskName;
-                  }
-              ),
+                  }),
               SizedBox(height: 30.0),
               ElevatedButton(
                 onPressed: () {
-                  Provider.of<TaskListProvider>(context).addTask(
+                  Provider.of<TaskListProvider>(context, listen: false).addTask(
                     Task(name: taskName),
                   );
+                  Navigator.pop(context);
                 },
                 child: Text('Add'),
               ),
