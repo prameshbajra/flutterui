@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todey/provider.dart';
 
 class TaskItem extends StatelessWidget {
   final String taskName;
@@ -15,13 +17,19 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        taskName,
-        style: TextStyle(
-          fontSize: 18.0,
-          fontWeight: FontWeight.w400,
-          decoration: isDone ? TextDecoration.lineThrough : null,
+      title: GestureDetector(
+        child: Text(
+          taskName,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w400,
+            decoration: isDone ? TextDecoration.lineThrough : null,
+          ),
         ),
+        onTap: () => {
+          Provider.of<TaskListProvider>(context, listen: false)
+              .removeTask(taskName),
+        },
       ),
       trailing: Checkbox(
         value: isDone,

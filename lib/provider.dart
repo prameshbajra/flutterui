@@ -9,8 +9,8 @@ class TaskListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeTask(Task task) {
-    tasks = tasks.where((element) => element.name == task.name).toList();
+  void removeTask(String taskName) {
+    tasks = tasks.where((element) => element.name != taskName).toList();
     notifyListeners();
   }
 
